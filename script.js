@@ -1,4 +1,4 @@
-const GAME_CHOICES = ["rock", "paper", "scissors"];
+const GAME_CHOICES = ["paper", "rock", "scissors"];
 
 
 function getComputerChoice() {
@@ -20,15 +20,21 @@ function getPlayerChoice() {
 }
 
 function determineWinner(playerChoice, computerChoice) {
-    switch(playerChoice, computerChoice) {
-        case playerChoice === computerChoice:
-            return "It's a tie!"
-        case playerChoice === "rock" && computerChoice === "scissors":
-            return "You win!"
-        case playerChoice > computerChoice:
-            return "You win!"
 
-        default:
-            return "You lose!"
-    }
+        if (playerChoice === computerChoice) {
+            return "It's a tie!"
+        } else if ((playerChoice === "scissors" && computerChoice === "paper") || !(playerChoice === "paper" && computerChoice === "scissors") && (GAME_CHOICES.indexOf(playerChoice) < GAME_CHOICES.indexOf(computerChoice) ))  {
+            return "You win! The computer lost!"
+        } 
+
+         return "You lose! The computer won!"
+}
+
+function playRound() {
+    let playerChoice = getPlayerChoice();
+    let computerChoice = getComputerChoice();
+
+    console.log(`You chose ${playerChoice}, computer chose ${computerChoice}`)
+
+    console.log(determineWinner(playerChoice, computerChoice))
 }
