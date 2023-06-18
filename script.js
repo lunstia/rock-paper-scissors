@@ -1,6 +1,9 @@
 const GAME_CHOICES = ["paper", "rock", "scissors"];
 
 let pointsToWin = 5;
+let announcer = document.querySelector(".textAnnouncement");
+let playerScore = document.querySelector("#playerScore");
+let computerScore = document.querySelector("#computerScore");
 
 function getComputerChoice() {
     let randomChoice = Math.floor(Math.random() * 3);
@@ -8,17 +11,7 @@ function getComputerChoice() {
     return GAME_CHOICES[randomChoice];
 }
 
-function getPlayerChoice() {
-    let playerChoice = prompt("Type in your choice! eg. rock, paper, or scissors");
-    if (!isNaN(playerChoice) || GAME_CHOICES.indexOf(playerChoice) === -1) {
-        alert("Invalid response, try again!")
-        return getPlayerChoice()
-    }
 
-    playerChoice.toLowerCase();
-
-    return playerChoice;
-}
 
 function determineWinner(playerChoice, computerChoice) {
 
@@ -32,37 +25,52 @@ function determineWinner(playerChoice, computerChoice) {
          return "computer";
 }
 
-function playRound() {
-    let playerChoice = getPlayerChoice();
+function playRound(playerChoice) {
     let computerChoice = getComputerChoice();
-
-    console.log(`You chose ${playerChoice}, computer chose ${computerChoice}`);
 
     return determineWinner(playerChoice, computerChoice);
 }
 
-function playMatch() {
-    let playerPoints = 0;
-    let computerPoints = 0;
-    let roundCounter = 0;
-    
-    while (playerPoints < pointsToWin && computerPoints < pointsToWin) {
-        console.log("%c", "<hr>");
-        console.log(`ROUND: ${++roundCounter}`);
-        let winner = playRound();
+function log(announcement) {
+    announcer.innerText = announcement;
+}
+
+
+
+
+let playerPoints = 0;
+let computerPoints = 0;
+let roundCounter = 0;
+
+let btns = document.querySelectorAll("img");
+
+btns.forEach(item => {
+    item.addEventListener('click', e => {
+        if (playerPoints >= 5 || computerPoints >= 5) return;
+
+        let winner = playRound(e.target.id);
         if (winner === "player") {
             playerPoints++;
-            console.log(`You(${playerPoints}) win! The computer(${computerPoints}) lost!`);
+            log(`You win! The computer lost!`);
         }else if (winner === "computer"){
             computerPoints++;
-            console.log(`You(${playerPoints}) lose! The computer(${computerPoints}) won!`);
+            log(`You lose! The computer won!`);
         }
-    }
 
-    if (playerPoints === 5) {
-        console.log("You beat the computer first to 5!");
-    }else {
-        console.log("The computer beat you first to 5!");
-    }
+        playerScore.innerHTML = playerPoints + "<p>YOU</p>";
+        computerScore.innerHTML = computerPoints + "<p>COMPUTER</p>";
+
+        if (playerPoints === 5) {
+            log("You beat the computer first to 5!");
+        }else if (computerPoints === 5) {
+            log("The computer beat you first to 5!");
+        }
+        
+    });
+})
+
+
     
-}
+
+
+
