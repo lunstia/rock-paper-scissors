@@ -47,13 +47,15 @@ function playMatch() {
     let roundCounter = 0;
     
     while (playerPoints < pointsToWin && computerPoints < pointsToWin) {
-        let winner = playRound()
+        console.log("%c", "<hr>");
+        console.log(`ROUND: ${++roundCounter}`);
+        let winner = playRound();
         if (winner === "player") {
             playerPoints++;
-            console.log(`You(${playerPoints}) win! The computer(${computerPoints}) lost! Round: ${++roundCounter}`);
+            console.log(`You(${playerPoints}) win! The computer(${computerPoints}) lost!`);
         }else if (winner === "computer"){
             computerPoints++;
-            console.log(`You(${playerPoints}) lose! The computer(${computerPoints}) won!  Round: ${++roundCounter}`);
+            console.log(`You(${playerPoints}) lose! The computer(${computerPoints}) won!`);
         }
     }
 
