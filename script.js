@@ -1,5 +1,6 @@
 const GAME_CHOICES = ["paper", "rock", "scissors"];
 
+let pointsToWin = 5;
 
 function getComputerChoice() {
     let randomChoice = Math.floor(Math.random() * 3);
@@ -22,12 +23,13 @@ function getPlayerChoice() {
 function determineWinner(playerChoice, computerChoice) {
 
         if (playerChoice === computerChoice) {
-            return "It's a tie!"
+            console.log("It's a tie!")
+            return;
         } else if ((playerChoice === "scissors" && computerChoice === "paper") || !(playerChoice === "paper" && computerChoice === "scissors") && (GAME_CHOICES.indexOf(playerChoice) < GAME_CHOICES.indexOf(computerChoice) ))  {
-            return "You win! The computer lost!"
+            return "player";
         } 
 
-         return "You lose! The computer won!"
+         return "computer"
 }
 
 function playRound() {
@@ -36,5 +38,29 @@ function playRound() {
 
     console.log(`You chose ${playerChoice}, computer chose ${computerChoice}`)
 
-    console.log(determineWinner(playerChoice, computerChoice))
+    return determineWinner(playerChoice, computerChoice)
+}
+
+function playMatch() {
+    let playerPoints = 0;
+    let computerPoints = 0;
+    let roundCounter = 0;
+    
+    while (playerPoints < pointsToWin && computerPoints < pointsToWin) {
+        let winner = playRound()
+        if (winner === "player") {
+            playerPoints++
+            console.log(`You(${playerPoints}) win! The computer(${computerPoints}) lost! Round: ${++roundCounter}`)
+        }else if (winner === "computer"){
+            computerPoints++
+            console.log(`You(${playerPoints}) lose! The computer(${computerPoints}) won!  Round: ${++roundCounter}`)
+        }
+    }
+
+    if (playerPoints === 5) {
+        console.log("You beat the computer first to 5!")
+    }else {
+        console.log("The computer beat you first to 5!")
+    }
+    
 }
