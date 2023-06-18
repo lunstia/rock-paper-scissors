@@ -16,7 +16,7 @@ function getComputerChoice() {
 function determineWinner(playerChoice, computerChoice) {
 
         if (playerChoice === computerChoice) {
-            console.log("It's a tie!");
+            log("It's a tie!");
             return;
         } else if ((playerChoice === "scissors" && computerChoice === "paper") || !(playerChoice === "paper" && computerChoice === "scissors") && (GAME_CHOICES.indexOf(playerChoice) < GAME_CHOICES.indexOf(computerChoice) ))  {
             return "player";
