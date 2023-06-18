@@ -15,7 +15,7 @@ function getPlayerChoice() {
         return getPlayerChoice()
     }
 
-    playerChoice.toLowerCase()
+    playerChoice.toLowerCase();
 
     return playerChoice;
 }
@@ -23,22 +23,22 @@ function getPlayerChoice() {
 function determineWinner(playerChoice, computerChoice) {
 
         if (playerChoice === computerChoice) {
-            console.log("It's a tie!")
+            console.log("It's a tie!");
             return;
         } else if ((playerChoice === "scissors" && computerChoice === "paper") || !(playerChoice === "paper" && computerChoice === "scissors") && (GAME_CHOICES.indexOf(playerChoice) < GAME_CHOICES.indexOf(computerChoice) ))  {
             return "player";
         } 
 
-         return "computer"
+         return "computer";
 }
 
 function playRound() {
     let playerChoice = getPlayerChoice();
     let computerChoice = getComputerChoice();
 
-    console.log(`You chose ${playerChoice}, computer chose ${computerChoice}`)
+    console.log(`You chose ${playerChoice}, computer chose ${computerChoice}`);
 
-    return determineWinner(playerChoice, computerChoice)
+    return determineWinner(playerChoice, computerChoice);
 }
 
 function playMatch() {
@@ -49,18 +49,18 @@ function playMatch() {
     while (playerPoints < pointsToWin && computerPoints < pointsToWin) {
         let winner = playRound()
         if (winner === "player") {
-            playerPoints++
-            console.log(`You(${playerPoints}) win! The computer(${computerPoints}) lost! Round: ${++roundCounter}`)
+            playerPoints++;
+            console.log(`You(${playerPoints}) win! The computer(${computerPoints}) lost! Round: ${++roundCounter}`);
         }else if (winner === "computer"){
-            computerPoints++
-            console.log(`You(${playerPoints}) lose! The computer(${computerPoints}) won!  Round: ${++roundCounter}`)
+            computerPoints++;
+            console.log(`You(${playerPoints}) lose! The computer(${computerPoints}) won!  Round: ${++roundCounter}`);
         }
     }
 
     if (playerPoints === 5) {
-        console.log("You beat the computer first to 5!")
+        console.log("You beat the computer first to 5!");
     }else {
-        console.log("The computer beat you first to 5!")
+        console.log("The computer beat you first to 5!");
     }
     
 }
